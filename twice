@@ -20,7 +20,7 @@ int safeInputInt() {
 }
 
 int main() {
-    srand(time(0));
+    srand(time(0)); 
     int n;
     int choice;
     int array[MAX_SIZE];
@@ -52,19 +52,19 @@ int main() {
                     break;
                 }
 
-                printf("Введіть елементи масиву:\n");
+                printf("Елементи масиву:\n");
                 for (int i = 0; i < n; i++) {
-                    printf("a[%d] = ", i);
-                    scanf("%d", &array[i]);
+                    array[i] = rand() % 201 - 100; 
+                    printf("a[%d] = %d\n", i, array[i]);
                 }
 
                 int max_index = 0;
                 for (int i = 1; i < n; i++) {
-                    if (array[i] > array[max_index]) {
+                    if (array[i] >= array[max_index]) {
                         max_index = i;
                     }
                 }
-                printf("Максимальний номер елементу масиву: %d\n", max_index + 1);
+                printf("Максимальний номер елементу масиву: %d (значення: %d)\n", max_index + 1, array[max_index]);
                 break;
             }
 
@@ -76,10 +76,10 @@ int main() {
                     break;
                 }
 
-                printf("Введіть елементи масиву:\n");
+                printf("Елементи масиву:\n");
                 for (int i = 0; i < n; i++) {
-                    printf("a[%d] = ", i);
-                    scanf("%d", &array[i]);
+                    array[i] = rand() % 201 - 100; // Генеруємо випадкові числа в діапазоні [-100, 100]
+                    printf("a[%d] = %d\n", i, array[i]);
                 }
 
                 int first_zero_index = -1;
@@ -105,7 +105,7 @@ int main() {
                     }
                 }
 
-                for (int i = first_zero_index + 1; i < last_zero_index; i++) {
+                               for (int i = first_zero_index + 1; i < last_zero_index; i++) {
                     sum += abs(array[i]); 
                 }
 
@@ -121,3 +121,4 @@ int main() {
 
     return 0;
 }
+
