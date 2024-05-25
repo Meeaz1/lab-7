@@ -20,6 +20,7 @@ int safeInputInt() {
 }
 
 int main() {
+    srand(time(0));
     int n;
     int choice;
     int array[MAX_SIZE];
@@ -63,7 +64,7 @@ int main() {
                         max_index = i;
                     }
                 }
-                printf("Номер максимального елемента масиву: %d (значення: %d)\n", max_index, array[max_index]);
+                printf("Максимальний номер елементу масиву: %d\n", max_index + 1);
                 break;
             }
 
