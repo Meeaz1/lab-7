@@ -1,0 +1,122 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define MAX_SIZE 100
+
+int safeInputInt() {
+    int value;
+    int result;
+    char ch;
+    while (1) {
+        result = scanf("%d", &value);
+        if (result == 1) {
+            return value;
+        } else {
+            while ((ch = getchar()) != '\n' && ch != EOF);
+            printf("Некоректне введення. Спробуйте ще раз: ");
+        }
+    }
+}
+
+int main() {
+    int n;
+    int choice;
+    int array[MAX_SIZE];
+
+    do {
+        printf("\nМеню:\n");
+        printf("1. Знайти номер максимального елемента масиву\n");
+        printf("2. Знайти суму модулів елементів масиву, розташованих між першим і останнім нульовими елементами\n");
+        printf("3. Вийти\n");
+        printf("Виберіть опцію: ");
+        choice = safeInputInt();
+
+        switch (choice) {
+            case 1:
+            case 2:
+            case 3:
+                break;
+            default:
+                printf("Неправильний вибір. Спробуйте ще раз.\n");
+                continue;
+        }
+
+        switch (choice) {
+            case 1: {
+                printf("Введіть розмір масиву (не більше %d): ", MAX_SIZE);
+                n = safeInputInt();
+                if (n <= 0 || n > MAX_SIZE) {
+                    printf("Неправильний розмір масиву. Спробуйте ще раз.\n");
+                    break;
+                }
+
+                printf("Введіть елементи масиву:\n");
+                for (int i = 0; i < n; i++) {
+                    printf("a[%d] = ", i);
+                    scanf("%d", &array[i]);
+                }
+
+                int max_index = 0;
+                for (int i = 1; i < n; i++) {
+                    if (array[i] > array[max_index]) {
+                        max_index = i;
+                    }
+                }
+                printf("Номер максимального елемента масиву: %d (значення: %d)\n", max_index, array[max_index]);
+                break;
+            }
+
+            case 2: {
+                printf("Введіть розмір масиву (не більше %d): ", MAX_SIZE);
+                n = safeInputInt();
+                if (n <= 0 || n > MAX_SIZE) {
+                    printf("Неправильний розмір масиву. Спробуйте ще раз.\n");
+                    break;
+                }
+
+                printf("Введіть елементи масиву:\n");
+                for (int i = 0; i < n; i++) {
+                    printf("a[%d] = ", i);
+                    scanf("%d", &array[i]);
+                }
+
+                int first_zero_index = -1;
+                int last_zero_index = -1;
+                int sum = 0;
+
+                for (int i = 0; i < n; i++) {
+                    if (array[i] == 0) {
+                        first_zero_index = i;
+                        break;
+                    }
+                }
+
+                if (first_zero_index == -1) {
+                    printf("В масиві відсутні нульові елементи.\n");
+                    break;
+                }
+
+                for (int i = n - 1; i >= 0; i--) {
+                    if (array[i] == 0) {
+                        last_zero_index = i;
+                        break;
+                    }
+                }
+
+                for (int i = first_zero_index + 1; i < last_zero_index; i++) {
+                    sum += abs(array[i]); 
+                }
+
+                printf("Сума модулів елементів масиву, розташованих між першим і останнім нульовими елементами: %d\n", sum);
+                break;
+            }
+
+            case 3:
+                printf("Вихід з програми.\n");
+                break;
+        }
+    } while (choice != 3);
+
+    return 0;
+}
