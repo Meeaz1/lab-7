@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int main() {
     int рік;
@@ -6,7 +7,11 @@ int main() {
 
     do {
         printf("Введіть вік: ");
-        scanf("%d", &рік);
+        if (scanf("%d", &рік) != 1 || getchar() != '\n') { // Перевірка на коректне введення цілого числа
+            printf("Неправильне введення. Будь ласка, введіть ціле число.\n");
+            while (getchar() != '\n'); 
+            continue;
+        }
 
         int остаток = рік % 10;
         char* результат;
